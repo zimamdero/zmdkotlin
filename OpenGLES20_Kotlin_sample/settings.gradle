@@ -1,0 +1,5 @@
+include ':texturedcube'
+include ':multitexture'
+include ':cubemap'
+include ':ambient_goraud_phong'
+rootProject.name = "OpenGLES20_Kotlin_sample"
