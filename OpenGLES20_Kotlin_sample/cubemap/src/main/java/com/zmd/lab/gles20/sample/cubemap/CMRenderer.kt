@@ -27,42 +27,42 @@ class CMRenderer(val context: Context): GLSurfaceView.Renderer {
     private var camera = GLCamera(GLCamera.CAMERA_TYPE_TRACKING)
 
     private val vertexShaderCode =
-    //geometry
-    "attribute vec3 aVertexPosition;" +
-    "attribute vec3 aVertexNormal;" +
-    "attribute vec2 aVertexTextureCoords;" +
+        //geometry
+        "attribute vec3 aVertexPosition;" +
+        "attribute vec3 aVertexNormal;" +
+        "attribute vec2 aVertexTextureCoords;" +
 
-    //matrices
-    "uniform mat4 uMVMatrix;" +
-    "uniform mat4 uPMatrix;" +
-    "uniform mat4 uNMatrix;" +
+        //matrices
+        "uniform mat4 uMVMatrix;" +
+        "uniform mat4 uPMatrix;" +
+        "uniform mat4 uNMatrix;" +
 
-    //varyings
-    "varying vec2 vTextureCoord;" +
-    "varying vec3 vVertexNormal;" +
+        //varyings
+        "varying vec2 vTextureCoord;" +
+        "varying vec3 vVertexNormal;" +
 
-    "void main(void) {" +
-        //Final vertex position
-        "gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);" +
-        "vTextureCoord = aVertexTextureCoords;" +
-        "vVertexNormal = (uNMatrix * vec4(-aVertexPosition, 1.0)).xyz;" +
-    "}";
+        "void main(void) {" +
+            //Final vertex position
+            "gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);" +
+            "vTextureCoord = aVertexTextureCoords;" +
+            "vVertexNormal = (uNMatrix * vec4(-aVertexPosition, 1.0)).xyz;" +
+        "}"
     private val fragmentShaderCode =
-    "precision highp float;" +
-    //sampler
-    "uniform sampler2D uSampler;" +
-    "uniform samplerCube uCubeSampler;" +
+        "precision highp float;" +
+        //sampler
+        "uniform sampler2D uSampler;" +
+        "uniform samplerCube uCubeSampler;" +
 
-    //varying
-    "varying vec2 vTextureCoord;" +
-    "varying vec3 vVertexNormal;" +
+        //varying
+        "varying vec2 vTextureCoord;" +
+        "varying vec3 vVertexNormal;" +
 
-    "void main(void)" +
-    "{" +
-    "    gl_FragColor = texture2D(uSampler, vTextureCoord) * textureCube(uCubeSampler, vVertexNormal);" +
-    //        "    gl_FragColor = textureCube(uCubeSampler, vVertexNormal);" +
-    //"    gl_FragColor = texture2D(uSampler, vTextureCoord);" +
-    "}";
+        "void main(void)" +
+        "{" +
+        "    gl_FragColor = texture2D(uSampler, vTextureCoord) * textureCube(uCubeSampler, vVertexNormal);" +
+        //        "    gl_FragColor = textureCube(uCubeSampler, vVertexNormal);" +
+        //"    gl_FragColor = texture2D(uSampler, vTextureCoord);" +
+        "}"
 
     private val mvMatrix = FloatArray(16)
     private val pMatrix = FloatArray(16)

@@ -39,7 +39,7 @@ class ToonGLRenderer: GLSurfaceView.Renderer {
             "vVertex = aVertexPosition;" +
 
             "gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);" +
-        "}";
+        "}"
     private val fragmentShaderCode =
         "precision highp float;" +
 
@@ -87,7 +87,7 @@ class ToonGLRenderer: GLSurfaceView.Renderer {
                 "float diffuse = max(dot(N,L),0.0);" +
                 "if (diffuse < 0.5) gl_FragColor *=0.8;" +
             "}" +
-        "}";
+        "}"
 
     private val mvMatrix = FloatArray(16)
     private val pMatrix = FloatArray(16)

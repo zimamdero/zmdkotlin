@@ -31,35 +31,35 @@ class MTRenderer(val context: Context): GLSurfaceView.Renderer {
     private var camera = GLCamera(GLCamera.CAMERA_TYPE_TRACKING)
 
     private val vertexShaderCode =
-    "attribute vec3 aVertexPosition;" +
-    "attribute vec2 aVertexTextureCoords;" +
+        "attribute vec3 aVertexPosition;" +
+        "attribute vec2 aVertexTextureCoords;" +
 
-    //matrices
-    "uniform mat4 uMVMatrix;" +
-    "uniform mat4 uPMatrix;" +
-    "uniform mat4 uNMatrix;" +
+        //matrices
+        "uniform mat4 uMVMatrix;" +
+        "uniform mat4 uPMatrix;" +
+        "uniform mat4 uNMatrix;" +
 
-    //varyings
-    "varying vec2 vTextureCoord;" +
+        //varyings
+        "varying vec2 vTextureCoord;" +
 
-    "void main(void) {" +
-        //Final vertex position
-        "gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);" +
-        "vTextureCoord = aVertexTextureCoords;" +
-    "}";
+        "void main(void) {" +
+            //Final vertex position
+            "gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);" +
+            "vTextureCoord = aVertexTextureCoords;" +
+        "}"
     private val fragmentShaderCode =
-    "precision highp float;" +
-    //sampler
-    "uniform sampler2D uSampler;" +
-    "uniform sampler2D uSampler2;" +
+        "precision highp float;" +
+        //sampler
+        "uniform sampler2D uSampler;" +
+        "uniform sampler2D uSampler2;" +
 
-    //varying
-    "varying vec2 vTextureCoord;" +
+        //varying
+        "varying vec2 vTextureCoord;" +
 
-    "void main(void)" +
-    "{" +
-        "gl_FragColor = texture2D(uSampler2, vTextureCoord) * texture2D(uSampler, vTextureCoord);"+
-    "}";
+        "void main(void)" +
+        "{" +
+            "gl_FragColor = texture2D(uSampler2, vTextureCoord) * texture2D(uSampler, vTextureCoord);"+
+        "}"
 
     private val mvMatrix = FloatArray(16)
     private val pMatrix = FloatArray(16)

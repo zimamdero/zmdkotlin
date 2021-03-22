@@ -1,3 +1,4 @@
+include ':pointsprites'
 include ':toon'
 include ':texturedcube'
 include ':multitexture'
