@@ -1,3 +1,4 @@
+include ':normalmap'
 include ':pointsprites'
 include ':toon'
 include ':texturedcube'
