@@ -1,3 +1,4 @@
+include ':positionallighting'
 include ':normalmap'
 include ':pointsprites'
 include ':toon'
