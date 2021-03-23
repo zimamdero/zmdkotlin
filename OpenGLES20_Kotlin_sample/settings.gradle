@@ -1,3 +1,4 @@
+include ':postprocessing'
 include ':positionallighting'
 include ':normalmap'
 include ':pointsprites'
