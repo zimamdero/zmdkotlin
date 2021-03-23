@@ -226,15 +226,15 @@ class NMRenderer(val context: Context): GLSurfaceView.Renderer {
 
         Matrix.setIdentityM(mvMatrix, 0)
         Matrix.translateM(mvMatrix, 0, 0.0f, 0.0f, 0.0f)
-        Matrix.rotateM(mvMatrix, 0, angle, 0.0f, 1.0f, 0.0f)
+        Matrix.rotateM(mvMatrix, 0, angle, 1.0f, 1.0f, 0.0f)
 
         Matrix.multiplyMM(mvMatrix, 0, camera.getViewM(), 0, mvMatrix, 0)
         GLES20.glUniformMatrix4fv(uMVMatrix, 1, false, mvMatrix, 0)
         GLES20.glUniformMatrix4fv(uPMatrix, 1, false, pMatrix, 0)
 
         Matrix.setIdentityM(nMatrix, 0)
-        Matrix.invertM(nMatrix, 0, mvMatrix, 0)
-        Matrix.transposeM(nMatrix, 0, nMatrix, 0)
+        Matrix.transposeM(nMatrix, 0, mvMatrix, 0)
+        Matrix.invertM(nMatrix, 0, nMatrix, 0)
         GLES20.glUniformMatrix4fv(uNMatrix, 1, false, nMatrix, 0)
 
         GLES20.glEnableVertexAttribArray(aVertexPosition)
@@ -332,7 +332,7 @@ class NMRenderer(val context: Context): GLSurfaceView.Renderer {
         uNormalSampler = GLES20.glGetUniformLocation(program, "uNormalSampler")
 
         GLES20.glUseProgram(program)
-        GLES20.glUniform3fv(uLightPosition, 1, floatArrayOf(0f, 45f, 20f), 0)
+        GLES20.glUniform3fv(uLightPosition, 1, floatArrayOf(1f, 10f, 1f), 0)
         GLES20.glUniform4fv(uLightAmbient, 1, floatArrayOf(1.0f, 1.0f, 1.0f, 1.0f), 0)
         GLES20.glUniform4fv(uLightDiffuse, 1, floatArrayOf(1.0f, 1.0f, 1.0f, 1.0f), 0)
 

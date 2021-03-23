@@ -166,9 +166,9 @@ class MTRenderer(val context: Context): GLSurfaceView.Renderer {
         GLES20.glUniformMatrix4fv(uMVMatrix, 1, false, mvMatrix, 0)
         GLES20.glUniformMatrix4fv(uPMatrix, 1, false, pMatrix, 0)
 
+        Matrix.setIdentityM(nMatrix, 0)
         Matrix.transposeM(nMatrix, 0, camera.getViewM(), 0)
-        //Matrix.transposeM(nMatrix, 0, mvMatrix, 0);
-        //Matrix.invertM(nMatrix, 0, nMatrix, 0);
+        Matrix.invertM(nMatrix, 0, nMatrix, 0)
         GLES20.glUniformMatrix4fv(uNMatrix, 1, false, nMatrix, 0)
 
         GLES20.glEnableVertexAttribArray(aVertexPosition)

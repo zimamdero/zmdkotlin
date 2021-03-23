@@ -45,7 +45,8 @@ class CMRenderer(val context: Context): GLSurfaceView.Renderer {
             //Final vertex position
             "gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);" +
             "vTextureCoord = aVertexTextureCoords;" +
-            "vVertexNormal = (uNMatrix * vec4(-aVertexPosition, 1.0)).xyz;" +
+            //"vVertexNormal = (uNMatrix * vec4(-aVertexPosition, 1.0)).xyz;" +
+                "vVertexNormal = (uNMatrix * vec4(aVertexPosition, 1.0)).xyz;" +
         "}"
     private val fragmentShaderCode =
         "precision highp float;" +
@@ -193,6 +194,7 @@ class CMRenderer(val context: Context): GLSurfaceView.Renderer {
         GLES20.glUniformMatrix4fv(uPMatrix, 1, false, pMatrix, 0)
 
         Matrix.transposeM(nMatrix, 0, camera.getViewM(), 0)
+        Matrix.invertM(nMatrix, 0, nMatrix, 0)
         GLES20.glUniformMatrix4fv(uNMatrix, 1, false, nMatrix, 0)
 
         GLES20.glEnableVertexAttribArray(aVertexPosition)
@@ -245,7 +247,6 @@ class CMRenderer(val context: Context): GLSurfaceView.Renderer {
 
         val txb = ByteBuffer.allocateDirect(obj.textureCodes.size * 4)
         txb.order(ByteOrder.nativeOrder())
-
         texCoordBuffer = txb.asFloatBuffer()
         texCoordBuffer?.put(obj.textureCodes)
         texCoordBuffer?.position(0)
